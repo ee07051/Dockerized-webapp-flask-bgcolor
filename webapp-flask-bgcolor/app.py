@@ -18,9 +18,9 @@ color_codes = {
 SUPPORTED_COLORS = ",".join(color_codes.keys())
 
 # Get color from Environment variable
-COLOR_FROM_ENV = os.environ.get('APP_COLOR')
+HEX_COLOR_FROM_ENV = os.environ.get('APP_COLORHEXCODE')
 # Generate a random color
-COLOR = random.choice(["red", "green", "blue", "olive", "purple", "navy"])
+HEX_COLOR = random.choice(["red", "green", "blue", "olive", "purple", "navy"])
 # Get dynamic title from Environment variable
 TITLE_FROM_ENV = os.environ.get('APP_TITLE')
 # Set default title
@@ -29,7 +29,7 @@ TITLE = "Cloud Computing - University of West Attica"
 @app.route("/")
 def main():
     # return 'Hello'
-    return render_template('index.html', name=socket.gethostname(), color=color_codes[COLOR], colorname=COLOR, title=TITLE)
+    return render_template('index.html', name=socket.gethostname(), color=color_codes[HEX_COLOR], colorname=COLOR, title=TITLE)
 
 
 if __name__ == "__main__":
@@ -54,14 +54,14 @@ if __name__ == "__main__":
     parser.add_argument('--title', required=False)
     args = parser.parse_args()
 
-    if args.color:
-        print("Color from command line argument =" + args.color)
-        COLOR = args.color
-        if COLOR_FROM_ENV:
-            print("A color was set through environment variable -" + COLOR_FROM_ENV + ". However, color from command line argument takes precendence.")
-    elif COLOR_FROM_ENV:
-        print("No Command line argument. Color from environment variable =" + COLOR_FROM_ENV)
-        COLOR = COLOR_FROM_ENV
+    if args.colorhexcode:
+        print("Color from command line argument =" + args.colorhexcode)
+        COLOR = args.colorhexcode
+        if HEX_COLOR_FROM_ENV:
+            print("A color was set through environment variable -" + HEX_COLOR_FROM_ENV + ". However, color from command line argument takes precendence.")
+    elif HEX_COLOR_FROM_ENV:
+        print("No Command line argument. Color from environment variable =" + HEX_COLOR_FROM_ENV)
+        COLOR = HEX_COLOR_FROM_ENV
     else:
         print("No command line argument or environment variable. Picking a Random Color =" + COLOR)
 
